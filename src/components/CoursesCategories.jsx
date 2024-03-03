@@ -76,7 +76,7 @@ export function CoursesCategories() {
             >
               Ready to start your web development journey?
             </Typography>
-            <Button size="sm" color="white">
+            <Button size="sm" color="black">
               Enroll Now
             </Button>
           </CardBody>

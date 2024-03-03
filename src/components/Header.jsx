@@ -4,75 +4,64 @@ import WidthWrapper from "./WidthWrapper";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-import NavDropdown from "react-bootstrap/NavDropdown";
+import { UserButton, useUser } from "@clerk/nextjs";
+import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 const Header = () => {
+  const { user } = useUser();
+  const [isLogged, setIsLogged] = useState();
+  const pathname = usePathname();
+  useEffect(() => {
+    setIsLogged(window.location.href.toString().includes("signIn" || "signUp"));
+  }, []);
   return (
     <header>
       <WidthWrapper>
-        <Navbar collapseOnSelect  className="bg-body-transparent">
-          <Container>
-            <Navbar.Brand href="#home">
-              <Image
-                src="/assets/logo.png"
-                className=""
-                width={50}
-                height={50}
-                alt="logo"
-              />
-            </Navbar.Brand>
-            <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-            <Navbar.Collapse id="responsive-navbar-nav" className="justify-content-end">
-              <Nav >
-                <Nav.Link href="#features">Login</Nav.Link>
-                <Nav.Link href="#pricing">SignUp</Nav.Link>
-              </Nav>
-            </Navbar.Collapse>
-          </Container>
-        </Navbar>
+        {!isLogged && (
+          <Navbar collapseOnSelect className="bg-body-transparent">
+            <Container>
+              <Navbar.Brand href="/">
+                <Image
+                  src="/assets/logo.png"
+                  className=""
+                  width={50}
+                  height={50}
+                  alt="logo"
+                />
+              </Navbar.Brand>
+              <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+              <Navbar.Collapse
+                id="responsive-navbar-nav"
+                className="justify-content-end"
+              >
+                {user ? (
+                  <Nav className="flex items-center gap-2">
+                    {user.fullName}
+                    <UserButton afterSignOutUrl={pathname} />
+                  </Nav>
+                ) : (
+                  <Nav className="space-x-6">
+                    <Nav.Link
+                      className="bg-primary rounded-xl text-center sm:w-32 text-white text-lg"
+                      href="/signIn"
+                    >
+                      Sign in
+                    </Nav.Link>
+                    <Nav.Link
+                      className="border-primary rounded-xl text-center sm:w-32 border text-lg"
+                      href="/signUp"
+                    >
+                      Sign up
+                    </Nav.Link>
+                  </Nav>
+                )}
+              </Navbar.Collapse>
+            </Container>
+          </Navbar>
+        )}
       </WidthWrapper>
     </header>
   );
 };
 
 export default Header;
-
-/* import Container from 'react-bootstrap/Container';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
-import NavDropdown from 'react-bootstrap/NavDropdown';
-
-function CollapsibleExample() {
-  return (
-    <Navbar collapseOnSelect expand="lg" className="bg-body-tertiary">
-      <Container>
-        <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
-        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-        <Navbar.Collapse id="responsive-navbar-nav">
-          <Nav className="me-auto">
-            <Nav.Link href="#features">Features</Nav.Link>
-            <Nav.Link href="#pricing">Pricing</Nav.Link>
-            <NavDropdown title="Dropdown" id="collapsible-nav-dropdown">
-              <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.2">
-                Another action
-              </NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-              <NavDropdown.Divider />
-              <NavDropdown.Item href="#action/3.4">
-                Separated link
-              </NavDropdown.Item>
-            </NavDropdown>
-          </Nav>
-          <Nav>
-            <Nav.Link href="#deets">More deets</Nav.Link>
-            <Nav.Link eventKey={2} href="#memes">
-              Dank memes
-            </Nav.Link>
-          </Nav>
-        </Navbar.Collapse>
-      </Container>
-    </Navbar>
-  );
-}
-
-export default CollapsibleExample; */

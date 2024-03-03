@@ -9,15 +9,20 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@clerk/nextjs": "^4.29.8",
     "@heroicons/react": "^2.1.1",
     "@material-tailwind/react": "^2.1.9",
+    "@stripe/react-stripe-js": "^2.5.1",
+    "@stripe/stripe-js": "^3.0.6",
     "axios": "^1.6.7",
     "bootstrap": "^5.3.2",
     "lucide-react": "^0.330.0",
-    "next": "14.1.0",
+    "next": "^14.1.0",
     "react": "^18",
     "react-bootstrap": "^2.10.1",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "react-uuid": "^2.0.0",
+    "stripe": "^14.19.0"
   },
   "devDependencies": {
     "autoprefixer": "^10.0.1",

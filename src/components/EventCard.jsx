@@ -5,11 +5,9 @@ import {
   Card,
   CardBody,
   CardHeader,
-  Button,
 } from "@material-tailwind/react";
 
-
-export function EventCard({ img, title, desc, buttonLabel }) {
+export function EventCard({ img, title, desc }) {
   return (
     <Card color="transparent" shadow={false}>
       <CardHeader floated={false} className="mx-0 mt-0 mb-6 h-48">
@@ -33,9 +31,6 @@ export function EventCard({ img, title, desc, buttonLabel }) {
         <Typography className="mb-6 font-normal !text-gray-500">
           {desc}
         </Typography>
-        <Button color="gray" size="sm" className="z-20">
-          {buttonLabel}
-        </Button>
       </CardBody>
     </Card>
   );
