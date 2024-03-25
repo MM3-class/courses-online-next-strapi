@@ -3,9 +3,7 @@ import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import CheckoutForm from "./_components/CheckoutForm";
 
-const stripePromise = loadStripe(
-  `pk_test_51OpyQ3Ab2q5MaE0Cw7vIhdCCMA6eOm0XHqhDgY2DXqk9O88fawMHUN38EXjx7rQXsAeANedJm9XmIXExEo0duMWT000MLGWHdw`
-);
+const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIP_PUBLISHABLE_KEY);
 const page = () => {
 
   const appearance = {
